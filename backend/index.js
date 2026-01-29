@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRoutes);
-app.get("/api",(req,res)=> res.send("Job Tracker API is running..."));
+app.get("/",(req,res)=> res.send("Job Tracker API is running..."));
 app.use("/api/auth", require("../backend/routes/authRoutes.js"));
 app.use("/api/jobs", require("../backend/routes/jobRoutes"));
 
