@@ -7,7 +7,7 @@ const userRoutes = require("./routes/userRoutes");
 dotenv.config();
 connectDB();
 
-const app = express();
+const app = require("./api/index.js");
 app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRoutes);
