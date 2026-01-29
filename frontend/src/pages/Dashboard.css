@@ -1,0 +1,174 @@
+.dash-container {
+  min-height: 100vh;
+  background: #f4f6fb;
+  padding: 25px;
+  font-family: Arial, sans-serif;
+}
+
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 18px 20px;
+  border-radius: 14px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+.dash-header h2 {
+  font-size: 22px;
+  margin: 0;
+  color: #111827;
+}
+
+.logout-btn {
+  padding: 10px 14px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+.dash-card {
+  background: white;
+  padding: 18px 20px;
+  border-radius: 14px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+.dash-card h3 {
+  margin-bottom: 14px;
+  color: #111827;
+  font-size: 18px;
+}
+
+.job-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 12px;
+}
+
+.job-form input,
+.job-form select {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+}
+
+.add-btn {
+  padding: 12px 18px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: #1d4ed8;
+}
+
+.filter-row {
+  display: flex;
+  gap: 12px;
+}
+
+.filter-row input,
+.filter-row select {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+}
+
+.job-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.job-table th,
+.job-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.job-table th {
+  background: #f9fafb;
+  color: #111827;
+}
+
+.job-table td select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+.empty-text {
+  color: #6b7280;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.status-badge {
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.status-badge.Applied {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-badge.Interview {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.Selected {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.Rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+@media (max-width: 900px) {
+  .job-form {
+    grid-template-columns: 1fr;
+  }
+  .filter-row {
+    flex-direction: column;
+  }
+}

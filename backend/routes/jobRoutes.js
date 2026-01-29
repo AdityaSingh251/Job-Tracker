@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const protect = require("../middleware/auth");
-const Job = require("../models/Job");
+const Job = require("../models/job");
 
 // ✅ GET all jobs
 router.get("/", protect, async (req, res) => {
