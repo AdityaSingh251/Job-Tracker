@@ -98,7 +98,7 @@ export default function Dashboard() {
       }
 
       await axios.put(
-        `http://localhost:5000/api/jobs/${id}`,
+        `https://job-tracker-backend-lovatbackend.vercel.app/api/jobs/${id}`,
         { status: newStatus },
         {
           headers: {
