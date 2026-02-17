@@ -14,7 +14,7 @@ export default function Login() {
     setMsg("");
 
     try {
-      const res = await axios.post("https://job-tracker-ikyfrontend.vercel.app/api/auth/login", {
+      const res = await axios.post("https://job-tracker-backend-lovatbackend.vercel.app/api/auth/login", {
         email,
         password,
       });
