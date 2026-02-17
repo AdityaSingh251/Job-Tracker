@@ -2,7 +2,7 @@ import axios from "axios";
 
 // ✅ Change this if your backend port is different
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://job-tracker-backend-lovatbackend.vercel.app/api",
 });
 
 API.interceptors.request.use((req) => {
