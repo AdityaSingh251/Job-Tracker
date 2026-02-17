@@ -3,8 +3,8 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("../config/db");
-const authRoutes = require("../backend/routes/authRoutes");
-const jobRoutes = require("../backend/routes/jobRoutes");
+const authRoutes = require("../routes/authRoutes");
+const jobRoutes = require("../routes/jobRoutes");
 
 const app = express();
 
@@ -14,7 +14,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
-app.get("https://job-tracker-backend-lovatbackend.vercel.app/api", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Job Tracker API running ✅");
 });
 
