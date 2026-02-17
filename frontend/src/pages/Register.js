@@ -15,7 +15,7 @@ export default function Register() {
     setMsg("");
 
     try {
-      await axios.post("https://job-tracker-ikyfrontend.vercel.app/api/auth/register", {
+      await axios.post("https://job-tracker-backend-lovatbackend.vercel.app/api/auth/register", {
         name,
         email,
         password,
