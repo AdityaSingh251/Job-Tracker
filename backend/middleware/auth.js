@@ -13,7 +13,7 @@ const protect = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // ✅ Works for both payload formats
+
     const userId = decoded.id || decoded.user_id;
 
     const user = await User.findById(userId).select("-password");
