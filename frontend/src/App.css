@@ -36,3 +36,128 @@
     transform: rotate(360deg);
   }
 }
+/* Main Mac Window */
+.app-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  border-radius: 24px;
+  overflow: hidden;
+
+  backdrop-filter: blur(25px);
+  background: rgba(255, 255, 255, 0.65);
+
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Mac Header */
+.window-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Traffic Light Buttons */
+.circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.red { background: #ff5f57; }
+.yellow { background: #ffbd2e; }
+.green { background: #28c840; }
+
+/* Layout */
+.main-layout {
+  display: flex;
+  min-height: 600px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  padding: 24px;
+
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(20px);
+
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* Sidebar Buttons */
+.nav-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Content Area */
+.content {
+  flex: 1;
+  padding: 32px;
+}
+
+/* Cards */
+.card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+
+  padding: 24px;
+  border-radius: 20px;
+
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  margin-bottom: 24px;
+}
+
+.card h3 {
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.card p {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Primary Button */
+.primary-btn {
+  padding: 10px 18px;
+  border-radius: 14px;
+  border: none;
+  background: #1f2937;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.primary-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
+}
+
