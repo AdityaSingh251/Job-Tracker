@@ -49,33 +49,34 @@ export default function Login() {
 
         <form className="login-form" onSubmit={handleLogin}>
           {/* Email Field */}
-          <div className="input-group">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label>Email</label>
-          </div>
+      <div className={`input-group ${email ? "filled" : ""}`}>
+  <input
+    type="email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    required
+  />
+  <label>Email</label>
+</div>
 
-          {/* Password Field */}
-          <div className="input-group password-group">
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <label>Password</label>
 
-            <span
-              className="toggle-password"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "🙈" : "👁"}
-            </span>
-          </div>
+          <div className={`input-group password-group ${password ? "filled" : ""}`}>
+  <input
+    type={showPassword ? "text" : "password"}
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    required
+  />
+  <label>Password</label>
+
+  <button
+    type="button"
+    className="toggle-password"
+    onClick={() => setShowPassword(!showPassword)}
+  >
+    {showPassword ? "🙈" : "👁"}
+  </button>
+</div>
 
           <button type="submit" className="login-btn" disabled={loading}>
             {loading ? <span className="spinner"></span> : "Login"}
