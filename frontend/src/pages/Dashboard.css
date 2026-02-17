@@ -1,174 +1,145 @@
-.dash-container {
+/* Layout */
+.dashboard-container {
+  padding: 40px 60px;
+  background: #f4f7fb;
   min-height: 100vh;
-  background: #f4f6fb;
-  padding: 25px;
-  font-family: Arial, sans-serif;
 }
 
-.dash-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Title */
+.dashboard-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  color: #1f2937;
+}
+
+/* Card */
+.dashboard-card {
   background: white;
-  padding: 18px 20px;
-  border-radius: 14px;
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  margin-bottom: 25px;
+  transition: 0.3s ease;
 }
 
-.dash-header h2 {
-  font-size: 22px;
-  margin: 0;
-  color: #111827;
+.dashboard-card:hover {
+  transform: translateY(-3px);
 }
 
-.logout-btn {
-  padding: 10px 14px;
-  border: none;
-  background: #ef4444;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.logout-btn:hover {
-  background: #dc2626;
-}
-
-.dash-card {
-  background: white;
-  padding: 18px 20px;
-  border-radius: 14px;
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
-}
-
-.dash-card h3 {
-  margin-bottom: 14px;
-  color: #111827;
-  font-size: 18px;
-}
-
-.job-form {
+/* Add Job Grid */
+.add-job-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 15px;
 }
 
-.job-form input,
-.job-form select {
+.add-job-grid input,
+.add-job-grid select {
   padding: 12px;
   border-radius: 10px;
   border: 1px solid #d1d5db;
-  outline: none;
+  font-size: 14px;
 }
 
-.add-btn {
-  padding: 12px 18px;
-  background: #2563eb;
+/* Search */
+.search-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* Buttons */
+.primary-btn {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white;
   border: none;
+  padding: 12px;
   border-radius: 10px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
+  transition: 0.3s ease;
 }
 
-.add-btn:hover {
-  background: #1d4ed8;
-}
-
-.filter-row {
-  display: flex;
-  gap: 12px;
-}
-
-.filter-row input,
-.filter-row select {
-  flex: 1;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  outline: none;
-}
-
-.job-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-.job-table th,
-.job-table td {
-  padding: 12px;
-  border-bottom: 1px solid #e5e7eb;
-  text-align: left;
-}
-
-.job-table th {
-  background: #f9fafb;
-  color: #111827;
-}
-
-.job-table td select {
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
 }
 
 .delete-btn {
   background: #ef4444;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: 700;
 }
 
-.delete-btn:hover {
-  background: #dc2626;
+/* Table */
+.job-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
 }
 
-.empty-text {
-  color: #6b7280;
-  font-size: 14px;
-  margin-top: 10px;
-}
-
-.status-badge {
-  padding: 6px 10px;
-  border-radius: 10px;
+.job-table th {
+  text-align: left;
+  padding: 12px;
   font-size: 13px;
-  font-weight: 700;
-  display: inline-block;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-.status-badge.Applied {
+.job-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.job-table tr:hover {
+  background: #f9fafb;
+}
+
+/* Status Badges */
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status.applied {
   background: #dbeafe;
-  color: #1e40af;
+  color: #2563eb;
 }
 
-.status-badge.Interview {
+.status.interview {
   background: #fef3c7;
-  color: #92400e;
+  color: #d97706;
 }
 
-.status-badge.Selected {
+.status.offer {
   background: #dcfce7;
-  color: #166534;
+  color: #16a34a;
 }
 
-.status-badge.Rejected {
+.status.rejected {
   background: #fee2e2;
-  color: #991b1b;
+  color: #dc2626;
 }
 
+/* Responsive */
 @media (max-width: 900px) {
-  .job-form {
+  .add-job-grid {
     grid-template-columns: 1fr;
   }
-  .filter-row {
-    flex-direction: column;
+
+  .search-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-container {
+    padding: 20px;
   }
 }
