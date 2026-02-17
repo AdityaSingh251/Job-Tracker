@@ -98,7 +98,7 @@ export default function Dashboard() {
       }
 
       await axios.put(
-        `https://job-tracker-backend-lovatbackend.vercel.app/api/jobs/${id}`,
+        `http://localhost:5000/api/jobs/${id}`,
         { status: newStatus },
         {
           headers: {
@@ -159,147 +159,128 @@ export default function Dashboard() {
     return matchesSearch && matchesFilter;
   });
 
- return (
-  <div className="app-container">
-    <div className="window-header">
-      <div className="circle red"></div>
-      <div className="circle yellow"></div>
-      <div className="circle green"></div>
-      <span className="window-title">Job Tracker</span>
-
-      <button className="logout-btn" onClick={handleLogout}>
-        Logout
-      </button>
-    </div>
-
-    <div className="main-layout">
-
-      {/* Sidebar */}
-      <div className="sidebar">
-        <h2>Dashboard</h2>
-        <p>Total Jobs</p>
-        <div className="stats-number">{jobs.length}</div>
+  return (
+    <div className="dash-container">
+      {/* HEADER */}
+      <div className="dash-header">
+        <h2>📌 Job Tracker Dashboard</h2>
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
 
-      {/* Main Content */}
-      <div className="content">
+      {/* ADD JOB FORM */}
+      <div className="dash-card">
+        <h3>Add New Job</h3>
+        <form className="job-form" onSubmit={addJob}>
+          <input
+            type="text"
+            placeholder="Company Name"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+          />
 
-        {/* Add Job */}
-        <div className="card">
-          <h3>Add New Job</h3>
-          <form className="job-form" onSubmit={addJob}>
-            <input
-              type="text"
-              placeholder="Company Name"
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-            />
+          <input
+            type="text"
+            placeholder="Role / Position"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+          />
 
-            <input
-              type="text"
-              placeholder="Role / Position"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-            />
+          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option>Applied</option>
+            <option>Interview</option>
+            <option>Selected</option>
+            <option>Rejected</option>
+          </select>
 
-            <select value={status} onChange={(e) => setStatus(e.target.value)}>
-              <option>Applied</option>
-              <option>Interview</option>
-              <option>Selected</option>
-              <option>Rejected</option>
-            </select>
+          <button className="add-btn" type="submit">
+            + Add Job
+          </button>
+        </form>
+      </div>
 
-            <button className="primary-btn" type="submit">
-              + Add Job
-            </button>
-          </form>
+      {/* SEARCH + FILTER */}
+      <div className="dash-card">
+        <h3>Search & Filter</h3>
+
+        <div className="filter-row">
+          <input
+            type="text"
+            placeholder="Search by company or role..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+
+          <select
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+          >
+            <option value="All">All</option>
+            <option value="Applied">Applied</option>
+            <option value="Interview">Interview</option>
+            <option value="Selected">Selected</option>
+            <option value="Rejected">Rejected</option>
+          </select>
         </div>
+      </div>
 
-        {/* Search & Filter */}
-        <div className="card">
-          <h3>Search & Filter</h3>
+      {/* JOB TABLE */}
+      <div className="dash-card">
+        <h3>All Jobs ({filteredJobs.length})</h3>
 
-          <div className="filter-row">
-            <input
-              type="text"
-              placeholder="Search by company or role..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+        {filteredJobs.length === 0 ? (
+          <p className="empty-text">No jobs found. Add a job ✅</p>
+        ) : (
+          <table className="job-table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Update</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
 
-            <select
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-            >
-              <option value="All">All</option>
-              <option value="Applied">Applied</option>
-              <option value="Interview">Interview</option>
-              <option value="Selected">Selected</option>
-              <option value="Rejected">Rejected</option>
-            </select>
-          </div>
-        </div>
+            <tbody>
+              {filteredJobs.map((job) => (
+                <tr key={job._id}>
+                  <td>{job.company}</td>
+                  <td>{job.role}</td>
 
-        {/* Job Table */}
-        <div className="card">
-          <h3>All Jobs ({filteredJobs.length})</h3>
+                  <td>
+                    <span className={`status-badge ${job.status}`}>
+                      {job.status}
+                    </span>
+                  </td>
 
-          {filteredJobs.length === 0 ? (
-            <p className="empty-text">No jobs found.</p>
-          ) : (
-            <table className="job-table">
-              <thead>
-                <tr>
-                  <th>Company</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Update</th>
-                  <th>Delete</th>
+                  <td>
+                    <select
+                      value={job.status}
+                      onChange={(e) => updateStatus(job._id, e.target.value)}
+                    >
+                      <option>Applied</option>
+                      <option>Interview</option>
+                      <option>Selected</option>
+                      <option>Rejected</option>
+                    </select>
+                  </td>
+
+                  <td>
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteJob(job._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-
-              <tbody>
-                {filteredJobs.map((job) => (
-                  <tr key={job._id}>
-                    <td>{job.company}</td>
-                    <td>{job.role}</td>
-
-                    <td>
-                      <span className={`status-badge ${job.status}`}>
-                        {job.status}
-                      </span>
-                    </td>
-
-                    <td>
-                      <select
-                        value={job.status}
-                        onChange={(e) =>
-                          updateStatus(job._id, e.target.value)
-                        }
-                      >
-                        <option>Applied</option>
-                        <option>Interview</option>
-                        <option>Selected</option>
-                        <option>Rejected</option>
-                      </select>
-                    </td>
-
-                    <td>
-                      <button
-                        className="delete-btn"
-                        onClick={() => deleteJob(job._id)}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
-  </div>
-);
+  );
+} what about this dashboard.js code
