@@ -83,9 +83,7 @@ export default function Login() {
         </form>
 
         {msg && <p className="login-message">{msg}</p>}
-
-        <div className="login-footer">
-          Don't have an account? <Link to="/register">Register</Link>
+        <div className="login-footer">Don't have an account? <Link to="/register">Register</Link>
         </div>
       </div>
     </div>
