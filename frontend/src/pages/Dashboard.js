@@ -27,7 +27,7 @@ export default function Dashboard() {
         return;
       }
 
-      const res = await axios.get("http://localhost:5000/api/jobs", {
+      const res = await axios.get("https://job-tracker-ikyfrontend.vercel.app/api/jobs", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -69,7 +69,7 @@ export default function Dashboard() {
       }
 
       await axios.post(
-        "http://localhost:5000/api/jobs",
+        "https://job-tracker-ikyfrontend.vercel.app/api/jobs",
         { company, role, status },
         {
           headers: {
@@ -125,7 +125,7 @@ export default function Dashboard() {
         return;
       }
 
-      await axios.delete(`http://localhost:5000/api/jobs/${id}`, {
+      await axios.delete(`https://job-tracker-ikyfrontend.vercel.app/api/jobs/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
