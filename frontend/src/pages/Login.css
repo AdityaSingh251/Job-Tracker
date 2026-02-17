@@ -8,22 +8,35 @@
   padding: 20px;
 }
 
+/* Glow behind card */
+.login-container::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59,130,246,0.4), transparent 70%);
+  filter: blur(100px);
+  z-index: 0;
+}
+
 /* Card */
 .login-card {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 420px;
   padding: 40px 32px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.95);
+  background: #ffffff;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .login-card:hover {
   transform: translateY(-4px);
 }
 
-/* Title */
+/* Titles */
 .login-title {
   font-size: 28px;
   font-weight: 800;
@@ -36,42 +49,76 @@
   text-align: center;
   font-size: 14px;
   color: #6b7280;
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 }
 
 /* Form */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 22px;
 }
 
-.login-form label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #374151;
+/* Floating Input Group */
+.input-group {
+  position: relative;
 }
 
-/* Inputs */
-.login-form input {
-  padding: 14px;
-  font-size: 14px;
+.input-group input {
+  width: 100%;
+  padding: 16px 14px;
   border: 1px solid #d1d5db;
   border-radius: 12px;
   outline: none;
-  transition: all 0.25s ease;
+  font-size: 14px;
   background: #f9fafb;
+  transition: 0.3s ease;
 }
 
-.login-form input:focus {
+.input-group label {
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  font-size: 14px;
+  color: #6b7280;
+  pointer-events: none;
+  transition: 0.3s ease;
+  background: white;
+  padding: 0 4px;
+}
+
+/* Floating animation */
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 10px;
+  font-size: 12px;
+  color: #2563eb;
+}
+
+/* Focus */
+.input-group input:focus {
   border-color: #2563eb;
-  background: #ffffff;
+  background: white;
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+/* Password toggle */
+.password-group {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 16px;
 }
 
 /* Button */
 .login-btn {
-  margin-top: 10px;
   padding: 14px;
   font-size: 15px;
   font-weight: 700;
@@ -80,28 +127,58 @@
   cursor: pointer;
   background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white;
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.login-btn:hover {
+.login-btn:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
 }
 
+.login-btn:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Footer */
 .login-footer {
-  margin-top: 22px;
+  margin-top: 24px;
   text-align: center;
   font-size: 14px;
-  color: #374151;
 }
 
 .login-footer a {
-  font-weight: 600;
   color: #2563eb;
+  font-weight: 600;
   text-decoration: none;
 }
 
-.login-footer a:hover {
-  text-decoration: underline;
+/* Mobile Polish */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 30px 20px;
+  }
+
+  .login-title {
+    font-size: 24px;
+  }
 }
