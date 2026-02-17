@@ -161,8 +161,6 @@ export default function Dashboard() {
 
  return (
   <div className="app-container">
-
-    {/* 🍎 Mac Window Header */}
     <div className="window-header">
       <div className="circle red"></div>
       <div className="circle yellow"></div>
