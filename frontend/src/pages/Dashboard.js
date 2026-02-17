@@ -3,6 +3,8 @@ import axios from "axios";
 import "./Dashboard.css";
 import { useNavigate } from "react-router-dom";
 
+const API = "https://job-tracker-backend-lovatbackend.vercel.app/api";
+
 export default function Dashboard() {
   const [jobs, setJobs] = useState([]);
   const [company, setCompany] = useState("");
@@ -10,149 +12,100 @@ export default function Dashboard() {
   const [status, setStatus] = useState("Applied");
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState("All");
-  
-
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-  
 
-  // ✅ Fetch jobs
-  const fetchJobs = async () => {
-    try {
-      const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
-      // ✅ If no token -> redirect
-      if (!token) {
-        navigate("/");
-        return;
-      }
-
-      const res = await axios.get("https://job-tracker-backend-lovatbackend.vercel.app/api/jobs", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-     setJobs(Array.isArray(res.data) ? res.data : []);
-
-    } catch (err) {
-      console.log(err);
-      alert(err.response?.data?.message || "Error fetching jobs");
-    }
-  };
-
-  // ✅ On page load
+  // Redirect if no token
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (!token) {
       navigate("/");
-      return;
+    } else {
+      fetchJobs();
     }
-    fetchJobs();
     // eslint-disable-next-line
   }, []);
 
-  // ✅ Add Job
+  // Fetch Jobs
+  const fetchJobs = async () => {
+    try {
+      const res = await axios.get(`${API}/jobs`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setJobs(Array.isArray(res.data) ? res.data : []);
+    } catch (err) {
+      alert("Error fetching jobs");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Add Job
   const addJob = async (e) => {
     e.preventDefault();
-
-    if (!company || !role) {
-      alert("Please enter Company and Role");
-      return;
-    }
+    if (!company || !role) return alert("Enter Company and Role");
 
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        navigate("/");
-        return;
-      }
-
       await axios.post(
-        "https://job-tracker-backend-lovatbackend.vercel.app/api/jobs",
+        `${API}/jobs`,
         { company, role, status },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       setCompany("");
       setRole("");
       setStatus("Applied");
       fetchJobs();
-    } catch (err) {
-      console.log(err);
-      alert(err.response?.data?.message || "Error adding job");
+    } catch {
+      alert("Error adding job");
     }
   };
 
-  // ✅ Update Job Status
+  // Update Status
   const updateStatus = async (id, newStatus) => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        navigate("/");
-        return;
-      }
-
       await axios.put(
-        `http://localhost:5000/api/jobs/${id}`,
+        `${API}/jobs/${id}`,
         { status: newStatus },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       fetchJobs();
-    } catch (err) {
-      console.log(err);
-      alert(err.response?.data?.message || "Error updating status");
+    } catch {
+      alert("Error updating status");
     }
   };
 
-  // ✅ Delete Job
+  // Delete Job
   const deleteJob = async (id) => {
-    if (!window.confirm("Are you sure to delete this job?")) return;
+    if (!window.confirm("Delete this job?")) return;
 
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        navigate("/");
-        return;
-      }
-
-      await axios.delete(`https://job-tracker-backend-lovatbackend.vercel.app/api/jobs/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      await axios.delete(`${API}/jobs/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       fetchJobs();
-    } catch (err) {
-      console.log(err);
-      alert(err.response?.data?.message || "Error deleting job");
+    } catch {
+      alert("Error deleting job");
     }
   };
 
-  // ✅ Logout
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
 
-  // ✅ Search + Filter (safe)
+  // Search + Filter
   const filteredJobs = jobs.filter((job) => {
-    const companyText = (job.company || "").toLowerCase();
-    const roleText = (job.role || "").toLowerCase();
+    const text =
+      (job.company || "").toLowerCase() +
+      (job.role || "").toLowerCase();
 
-    const matchesSearch =
-      companyText.includes(search.toLowerCase()) ||
-      roleText.includes(search.toLowerCase());
-
+    const matchesSearch = text.includes(search.toLowerCase());
     const matchesFilter =
       filterStatus === "All" ? true : job.status === filterStatus;
 
@@ -163,15 +116,16 @@ export default function Dashboard() {
     <div className="dash-container">
       {/* HEADER */}
       <div className="dash-header">
-        <h2>📌 Job Tracker Dashboard</h2>
+        <h2>📊 Job Tracker Dashboard</h2>
         <button className="logout-btn" onClick={handleLogout}>
           Logout
         </button>
       </div>
 
-      {/* ADD JOB FORM */}
+      {/* ADD JOB */}
       <div className="dash-card">
         <h3>Add New Job</h3>
+
         <form className="job-form" onSubmit={addJob}>
           <input
             type="text"
@@ -187,16 +141,17 @@ export default function Dashboard() {
             onChange={(e) => setRole(e.target.value)}
           />
 
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+          >
             <option>Applied</option>
             <option>Interview</option>
             <option>Selected</option>
             <option>Rejected</option>
           </select>
 
-          <button className="add-btn" type="submit">
-            + Add Job
-          </button>
+          <button className="add-btn">+ Add Job</button>
         </form>
       </div>
 
@@ -217,20 +172,22 @@ export default function Dashboard() {
             onChange={(e) => setFilterStatus(e.target.value)}
           >
             <option value="All">All</option>
-            <option value="Applied">Applied</option>
-            <option value="Interview">Interview</option>
-            <option value="Selected">Selected</option>
-            <option value="Rejected">Rejected</option>
+            <option>Applied</option>
+            <option>Interview</option>
+            <option>Selected</option>
+            <option>Rejected</option>
           </select>
         </div>
       </div>
 
-      {/* JOB TABLE */}
+      {/* TABLE */}
       <div className="dash-card">
         <h3>All Jobs ({filteredJobs.length})</h3>
 
-        {filteredJobs.length === 0 ? (
-          <p className="empty-text">No jobs found. Add a job ✅</p>
+        {loading ? (
+          <p>Loading jobs...</p>
+        ) : filteredJobs.length === 0 ? (
+          <p className="empty-text">No jobs found.</p>
         ) : (
           <table className="job-table">
             <thead>
@@ -250,7 +207,9 @@ export default function Dashboard() {
                   <td>{job.role}</td>
 
                   <td>
-                    <span className={`status-badge ${job.status}`}>
+                    <span
+                      className={`status-badge ${job.status.toLowerCase()}`}
+                    >
                       {job.status}
                     </span>
                   </td>
@@ -258,7 +217,9 @@ export default function Dashboard() {
                   <td>
                     <select
                       value={job.status}
-                      onChange={(e) => updateStatus(job._id, e.target.value)}
+                      onChange={(e) =>
+                        updateStatus(job._id, e.target.value)
+                      }
                     >
                       <option>Applied</option>
                       <option>Interview</option>
@@ -283,4 +244,4 @@ export default function Dashboard() {
       </div>
     </div>
   );
-} 
+}
