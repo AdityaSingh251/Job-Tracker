@@ -14,3 +14,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* Apple Font System */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  background: linear-gradient(
+    135deg,
+    #f5f7fa,
+    #e4ecf7,
+    #dfe9f3
+  );
+
+  min-height: 100vh;
+  color: #1f2937;
+}
+
+/* Smooth animations everywhere */
+* {
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
