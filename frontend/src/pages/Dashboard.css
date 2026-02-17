@@ -1,21 +1,53 @@
-/* Layout */
-.dashboard-container {
-  padding: 40px 60px;
-  background: #f4f7fb;
+/* ============================= */
+/* Main Container */
+/* ============================= */
+
+.dash-container {
   min-height: 100vh;
+  background: #f4f7fb;
+  padding: 40px 60px;
+  font-family: "Inter", sans-serif;
 }
 
-/* Title */
-.dashboard-title {
+/* ============================= */
+/* Header */
+/* ============================= */
+
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.dash-header h2 {
   font-size: 28px;
   font-weight: 800;
-  margin-bottom: 30px;
   color: #1f2937;
 }
 
-/* Card */
-.dashboard-card {
-  background: white;
+.logout-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+/* ============================= */
+/* Cards */
+/* ============================= */
+
+.dash-card {
+  background: #ffffff;
   padding: 25px 30px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
@@ -23,77 +55,105 @@
   transition: 0.3s ease;
 }
 
-.dashboard-card:hover {
+.dash-card:hover {
   transform: translateY(-3px);
 }
 
-/* Add Job Grid */
-.add-job-grid {
+.dash-card h3 {
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #374151;
+}
+
+/* ============================= */
+/* Add Job Form */
+/* ============================= */
+
+.job-form {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
-  margin-top: 15px;
 }
 
-.add-job-grid input,
-.add-job-grid select {
+.job-form input,
+.job-form select {
   padding: 12px;
   border-radius: 10px;
   border: 1px solid #d1d5db;
   font-size: 14px;
+  transition: 0.2s ease;
 }
 
-/* Search */
-.search-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 15px;
-  margin-top: 15px;
+.job-form input:focus,
+.job-form select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  outline: none;
 }
 
-/* Buttons */
-.primary-btn {
+.add-btn {
   background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white;
   border: none;
-  padding: 12px;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
-.primary-btn:hover {
+.add-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
 }
 
-.delete-btn {
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 8px;
-  cursor: pointer;
+/* ============================= */
+/* Search + Filter */
+/* ============================= */
+
+.filter-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15px;
 }
 
+.filter-row input,
+.filter-row select {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.filter-row input:focus,
+.filter-row select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  outline: none;
+}
+
+/* ============================= */
 /* Table */
+/* ============================= */
+
 .job-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .job-table th {
   text-align: left;
   padding: 12px;
   font-size: 13px;
+  font-weight: 600;
   color: #6b7280;
   border-bottom: 1px solid #e5e7eb;
 }
 
 .job-table td {
   padding: 14px 12px;
+  font-size: 14px;
   border-bottom: 1px solid #f1f5f9;
 }
 
@@ -101,45 +161,80 @@
   background: #f9fafb;
 }
 
+/* ============================= */
 /* Status Badges */
-.status {
-  padding: 5px 10px;
+/* ============================= */
+
+.status-badge {
+  padding: 6px 12px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
 }
 
-.status.applied {
+.status-badge.applied {
   background: #dbeafe;
   color: #2563eb;
 }
 
-.status.interview {
+.status-badge.interview {
   background: #fef3c7;
   color: #d97706;
 }
 
-.status.offer {
+.status-badge.selected {
   background: #dcfce7;
   color: #16a34a;
 }
 
-.status.rejected {
+.status-badge.rejected {
   background: #fee2e2;
   color: #dc2626;
 }
 
+/* ============================= */
+/* Delete Button */
+/* ============================= */
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+/* ============================= */
+/* Empty Text */
+/* ============================= */
+
+.empty-text {
+  margin-top: 10px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ============================= */
 /* Responsive */
-@media (max-width: 900px) {
-  .add-job-grid {
+/* ============================= */
+
+@media (max-width: 1000px) {
+  .job-form {
     grid-template-columns: 1fr;
   }
 
-  .search-grid {
+  .filter-row {
     grid-template-columns: 1fr;
   }
 
-  .dashboard-container {
-    padding: 20px;
+  .dash-container {
+    padding: 25px;
   }
 }
