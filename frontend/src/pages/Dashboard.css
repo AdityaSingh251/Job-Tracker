@@ -1,175 +1,183 @@
 
-.dash-container {
-  min-height: 100vh;
-  background: #f4f6fb;
-  padding: 25px;
-  font-family: Arial, sans-serif;
-}
-
-.dash-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  padding: 18px 20px;
-  border-radius: 14px;
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
-}
-
-.dash-header h2 {
-  font-size: 22px;
+* {
   margin: 0;
-  color: #111827;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", 
+               "Helvetica Neue", sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #e4ecf7);
+  min-height: 100vh;
+  padding: 40px 20px;
+  color: #1d1d1f;
+}
+
+/* Main Container */
+.dashboard-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 35px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(25px);
+  border-radius: 22px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+  position: relative;
+  transition: 0.3s ease;
+}
+
+/* Header */
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+/* Section Titles */
+h2, h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 25px 0 15px;
+  color: #3a3a3c;
+}
+
+/* Logout Button */
 .logout-btn {
-  padding: 10px 14px;
-  border: none;
-  background: #ef4444;
-  color: white;
-  border-radius: 10px;
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  background: #f5f5f7;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-size: 14px;
   cursor: pointer;
-  font-weight: 700;
+  transition: all 0.2s ease;
 }
 
 .logout-btn:hover {
-  background: #dc2626;
+  background: #e5e5ea;
 }
 
-.dash-card {
-  background: white;
-  padding: 18px 20px;
+/* Input & Select Fields */
+input,
+select {
+  padding: 12px 16px;
   border-radius: 14px;
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
-}
-
-.dash-card h3 {
-  margin-bottom: 14px;
-  color: #111827;
-  font-size: 18px;
-}
-
-.job-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto;
-  gap: 12px;
-}
-
-.job-form input,
-.job-form select {
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #e0e0e0;
+  background: #f5f5f7;
+  font-size: 14px;
   outline: none;
+  margin-right: 10px;
+  margin-bottom: 12px;
+  transition: all 0.25s ease;
 }
 
-.add-btn {
-  padding: 12px 18px;
-  background: #2563eb;
-  color: white;
+input:focus,
+select:focus {
+  border-color: #0071e3;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
+}
+
+/* Buttons */
+button {
+  padding: 10px 18px;
+  border-radius: 14px;
   border: none;
-  border-radius: 10px;
-  font-weight: 700;
+  background: #0071e3;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.add-btn:hover {
-  background: #1d4ed8;
+button:hover {
+  background: #005bb5;
+  transform: translateY(-2px);
 }
 
-.filter-row {
-  display: flex;
-  gap: 12px;
-}
-
-.filter-row input,
-.filter-row select {
-  flex: 1;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  outline: none;
-}
-
-.job-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-.job-table th,
-.job-table td {
-  padding: 12px;
-  border-bottom: 1px solid #e5e7eb;
-  text-align: left;
-}
-
-.job-table th {
-  background: #f9fafb;
-  color: #111827;
-}
-
-.job-table td select {
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-}
-
+/* Delete Button */
 .delete-btn {
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 700;
+  background: #ff3b30;
 }
 
 .delete-btn:hover {
-  background: #dc2626;
+  background: #d92c22;
 }
 
-.empty-text {
-  color: #6b7280;
-  font-size: 14px;
-  margin-top: 10px;
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
 }
 
-.status-badge {
-  padding: 6px 10px;
-  border-radius: 10px;
+th {
+  text-align: left;
+  padding: 14px;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 500;
+  color: #6e6e73;
+  background: #f9f9fb;
+}
+
+td {
+  padding: 16px 14px;
+  font-size: 14px;
+  border-top: 1px solid #f0f0f0;
+}
+
+tr:hover {
+  background: rgba(0, 113, 227, 0.05);
+}
+
+/* Status Badge */
+.status {
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 500;
   display: inline-block;
 }
 
-.status-badge.Applied {
-  background: #dbeafe;
-  color: #1e40af;
+/* Applied */
+.status.applied {
+  background: #e8f3ff;
+  color: #0071e3;
 }
 
-.status-badge.Interview {
-  background: #fef3c7;
-  color: #92400e;
+/* Interview */
+.status.interview {
+  background: #fff4e5;
+  color: #ff9f0a;
 }
 
-.status-badge.Selected {
-  background: #dcfce7;
-  color: #166534;
+/* Rejected */
+.status.rejected {
+  background: #ffeaea;
+  color: #ff3b30;
 }
 
-.status-badge.Rejected {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-@media (max-width: 900px) {
-  .job-form {
-    grid-template-columns: 1fr;
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
   }
-  .filter-row {
-    flex-direction: column;
+
+  input,
+  select,
+  button {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  table {
+    font-size: 13px;
   }
 }
