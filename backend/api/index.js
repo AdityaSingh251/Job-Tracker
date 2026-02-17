@@ -14,7 +14,7 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
-app.get("/api", (req, res) => {
+app.get("https://job-tracker-backend-lovatbackend.vercel.app/api", (req, res) => {
   res.send("Job Tracker API running ✅");
 });
 
